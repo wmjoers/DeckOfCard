@@ -1,0 +1,45 @@
+[gd_scene load_steps=7 format=3 uid="uid://nym4bq604gx8"]
+
+[ext_resource type="PackedScene" uid="uid://dbyhi8j0x4a6v" path="res://scenes/table/table.tscn" id="1_pcpgs"]
+[ext_resource type="Script" path="res://scenes/card_area/card_area.gd" id="2_cs1vj"]
+[ext_resource type="PackedScene" uid="uid://cl7v1ao70mn7j" path="res://scenes/deck/deck.tscn" id="2_dy8a4"]
+[ext_resource type="PackedScene" uid="uid://crieshum5bbcq" path="res://scenes/card_area/card_area.tscn" id="2_epbl5"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_5kkn0"]
+size = Vector2(178, 59.5)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6tjgj"]
+radius = 22.0
+
+[node name="Main" type="Node2D"]
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="Table" parent="." instance=ExtResource("1_pcpgs")]
+
+[node name="Deck" parent="Table" instance=ExtResource("2_dy8a4")]
+position = Vector2(-202, -62)
+
+[node name="CardHand" type="Area2D" parent="Table"]
+position = Vector2(0, 117)
+collision_layer = 0
+script = ExtResource("2_cs1vj")
+
+[node name="ColorRect" type="ColorRect" parent="Table/CardHand"]
+offset_left = -89.0
+offset_top = -30.0
+offset_right = 89.0
+offset_bottom = 29.0
+color = Color(1, 1, 1, 0.0941176)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/CardHand"]
+position = Vector2(0, -0.75)
+shape = SubResource("RectangleShape2D_5kkn0")
+
+[node name="DiscardPile" parent="Table" instance=ExtResource("2_epbl5")]
+position = Vector2(212, -89)
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Table/DiscardPile"]
+shape = SubResource("CircleShape2D_6tjgj")

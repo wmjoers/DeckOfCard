@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardInfo" load_steps=3 format=3 uid="uid://dt7o426w1lnb3"]
+
+[ext_resource type="Script" path="res://scripts/types/card_info.gd" id="1_1wiwl"]
+[ext_resource type="Texture2D" uid="uid://drkdtok42sjjm" path="res://resources/card_textures/black_joker_tx.tres" id="2_5lagb"]
+
+[resource]
+script = ExtResource("1_1wiwl")
+suit = 5
+rank = 13
+texture = ExtResource("2_5lagb")

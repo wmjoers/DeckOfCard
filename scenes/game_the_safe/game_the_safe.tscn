@@ -1,0 +1,213 @@
+[gd_scene load_steps=10 format=3 uid="uid://d3gw8j7ttoeft"]
+
+[ext_resource type="Script" path="res://scenes/game_the_safe/game_the_safe.gd" id="1_jlito"]
+[ext_resource type="Texture2D" uid="uid://b55iddqqx45as" path="res://assets/TheSafe.png" id="2_k5oqk"]
+[ext_resource type="Script" path="res://scenes/interaction_area/interaction_area.gd" id="3_uuyfr"]
+[ext_resource type="PackedScene" uid="uid://cajs0tgregleq" path="res://scenes/game_the_safe/lock/lock.tscn" id="4_5qlp6"]
+[ext_resource type="LabelSettings" uid="uid://ck51gus4s16yq" path="res://resources/label_settings/title.tres" id="5_0q54e"]
+[ext_resource type="LabelSettings" uid="uid://c73erm5h1e1tq" path="res://resources/label_settings/text.tres" id="6_4atp4"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2f45r"]
+size = Vector2(143, 100)
+
+[sub_resource type="LabelSettings" id="LabelSettings_jwsh5"]
+font_size = 38
+font_color = Color(0, 0, 0, 0.490196)
+
+[sub_resource type="LabelSettings" id="LabelSettings_6x5hx"]
+font_size = 44
+font_color = Color(0, 0, 0, 0.490196)
+
+[node name="GameTest" type="Node2D"]
+script = ExtResource("1_jlito")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(2, 2)
+
+[node name="TheSafe" type="Sprite2D" parent="."]
+position = Vector2(-3.8147e-06, -11)
+scale = Vector2(0.339361, 0.339361)
+texture = ExtResource("2_k5oqk")
+
+[node name="Table" type="Node2D" parent="."]
+
+[node name="Cover" type="ColorRect" parent="."]
+offset_left = -308.0
+offset_top = -186.0
+offset_right = 308.0
+offset_bottom = 60.0
+color = Color(1, 1, 1, 0.737255)
+
+[node name="HandRect" type="ColorRect" parent="."]
+offset_left = -288.0
+offset_top = 62.0
+offset_right = -2.0
+offset_bottom = 162.0
+color = Color(1, 1, 1, 0.737255)
+
+[node name="AddRect" type="ColorRect" parent="."]
+offset_top = 62.0
+offset_right = 143.0
+offset_bottom = 162.0
+color = Color(1, 1, 1, 0.737255)
+
+[node name="AdditionArea" type="Area2D" parent="AddRect"]
+position = Vector2(72, 50)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_uuyfr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AddRect/AdditionArea"]
+shape = SubResource("RectangleShape2D_2f45r")
+
+[node name="Label" type="Label" parent="AddRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 10.0
+offset_top = 2.0
+offset_right = -8.0
+offset_bottom = -2.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "+"
+label_settings = SubResource("LabelSettings_jwsh5")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubRect" type="ColorRect" parent="."]
+offset_left = 145.0
+offset_top = 62.0
+offset_right = 288.0
+offset_bottom = 162.0
+color = Color(1, 1, 1, 0.737255)
+
+[node name="SubtractionArea" type="Area2D" parent="SubRect"]
+position = Vector2(72, 50)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_uuyfr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="SubRect/SubtractionArea"]
+shape = SubResource("RectangleShape2D_2f45r")
+
+[node name="Label2" type="Label" parent="SubRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 47.0
+offset_top = -3.0
+offset_right = -46.0
+offset_bottom = -42.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "_"
+label_settings = SubResource("LabelSettings_6x5hx")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="DeckMarker" type="Marker2D" parent="."]
+position = Vector2(-205, 18)
+
+[node name="DiscardPileMarker" type="Marker2D" parent="."]
+position = Vector2(217, -106)
+
+[node name="Locks" type="Node2D" parent="."]
+position = Vector2(0, 32)
+
+[node name="Lock0" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(0, -147)
+dependencies = Array[int]([1, 2])
+
+[node name="Lock1" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(-28, -115)
+dependencies = Array[int]([3, 4])
+
+[node name="Lock2" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(26, -114)
+dependencies = Array[int]([4, 5])
+
+[node name="Lock3" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(-55, -83)
+dependencies = Array[int]([6, 7])
+
+[node name="Lock4" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(-1, -82)
+dependencies = Array[int]([7, 8])
+
+[node name="Lock5" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(47, -84)
+dependencies = Array[int]([8, 9])
+
+[node name="Lock6" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(-75, -49)
+dependencies = Array[int]([10, 11])
+
+[node name="Lock7" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(-26, -50)
+dependencies = Array[int]([11, 12])
+
+[node name="Lock8" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(24, -50)
+dependencies = Array[int]([12, 13])
+
+[node name="Lock9" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(74, -50)
+dependencies = Array[int]([13, 14])
+
+[node name="Lock10" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(-99, -15)
+
+[node name="Lock12" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(-50, -16)
+
+[node name="Lock13" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(0, -16)
+
+[node name="Lock14" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(48, -17)
+
+[node name="Lock15" parent="Locks" instance=ExtResource("4_5qlp6")]
+position = Vector2(96, -16)
+
+[node name="Hand" type="Node2D" parent="."]
+position = Vector2(-282, 66)
+
+[node name="Card0" type="Marker2D" parent="Hand"]
+position = Vector2(35, 47)
+
+[node name="Card1" type="Marker2D" parent="Hand"]
+position = Vector2(84, 47)
+
+[node name="Card2" type="Marker2D" parent="Hand"]
+position = Vector2(134, 47)
+
+[node name="Card3" type="Marker2D" parent="Hand"]
+position = Vector2(185, 47)
+
+[node name="Card4" type="Marker2D" parent="Hand"]
+position = Vector2(236, 47)
+
+[node name="Label" type="Label" parent="."]
+visible = false
+offset_left = -233.0
+offset_top = -43.0
+offset_right = 250.0
+offset_bottom = 38.0
+text = "The Safecracker"
+label_settings = ExtResource("5_0q54e")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Label2" type="Label" parent="."]
+visible = false
+offset_left = -190.0
+offset_top = 114.0
+offset_right = 216.0
+offset_bottom = 149.0
+text = "Click to continue"
+label_settings = ExtResource("6_4atp4")
+horizontal_alignment = 1
+vertical_alignment = 1

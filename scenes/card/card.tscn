@@ -1,0 +1,25 @@
+[gd_scene load_steps=6 format=3 uid="uid://cfbvmk0e60otj"]
+
+[ext_resource type="Script" path="res://scenes/card/card.gd" id="1_ehe4u"]
+[ext_resource type="Texture2D" uid="uid://b33lw8p1nkcdb" path="res://resources/card_textures/clubs_jack_tx.tres" id="2_mdx55"]
+[ext_resource type="Texture2D" uid="uid://7r37s50xy4vq" path="res://resources/card_textures/colorless_back_tx.tres" id="3_kirh7"]
+[ext_resource type="PackedScene" uid="uid://dfdlrmb37rwja" path="res://scenes/interaction_area/interaction_area.tscn" id="4_cg3ap"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_yuwfh"]
+size = Vector2(42, 60)
+
+[node name="Card" type="Node2D"]
+script = ExtResource("1_ehe4u")
+
+[node name="CardSprite" type="Sprite2D" parent="."]
+z_index = 1
+texture = ExtResource("2_mdx55")
+
+[node name="ShadowSprite" type="Sprite2D" parent="."]
+self_modulate = Color(0, 0, 0, 0.337255)
+texture = ExtResource("3_kirh7")
+
+[node name="InteractionArea" parent="." instance=ExtResource("4_cg3ap")]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("RectangleShape2D_yuwfh")

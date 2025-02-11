@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardInfo" load_steps=3 format=3 uid="uid://bwitt5m15ski8"]
+
+[ext_resource type="Script" path="res://scripts/types/card_info.gd" id="1_g7eq5"]
+[ext_resource type="Texture2D" uid="uid://b33lw8p1nkcdb" path="res://resources/card_textures/clubs_jack_tx.tres" id="2_janof"]
+
+[resource]
+script = ExtResource("1_g7eq5")
+suit = 2
+rank = 10
+texture = ExtResource("2_janof")

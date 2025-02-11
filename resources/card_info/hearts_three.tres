@@ -1,0 +1,10 @@
+[gd_resource type="Resource" script_class="CardInfo" load_steps=3 format=3 uid="uid://bwe1qkxh3ekwq"]
+
+[ext_resource type="Script" path="res://scripts/types/card_info.gd" id="1_rfml7"]
+[ext_resource type="Texture2D" uid="uid://du8vge5id5as4" path="res://resources/card_textures/hearts_three_tx.tres" id="2_0fosf"]
+
+[resource]
+script = ExtResource("1_rfml7")
+suit = 0
+rank = 2
+texture = ExtResource("2_0fosf")
