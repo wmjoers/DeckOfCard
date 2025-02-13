@@ -14,5 +14,7 @@ static func create_state_impl(state: BaseState.State, game: GameTheSafe) -> Base
 			return CheckFreeLocksState.new(game)
 		BaseState.State.CHECK_ACES:
 			return CheckAcesState.new(game)
+		BaseState.State.CHECK_GAME_OVER:
+			return CheckGameOverState.new(game)
 			
 	return null

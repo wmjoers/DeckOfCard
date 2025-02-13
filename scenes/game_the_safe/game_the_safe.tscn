@@ -1,11 +1,10 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3gw8j7ttoeft"]
+[gd_scene load_steps=9 format=3 uid="uid://d3gw8j7ttoeft"]
 
 [ext_resource type="Script" path="res://scenes/game_the_safe/game_the_safe.gd" id="1_jlito"]
-[ext_resource type="Texture2D" uid="uid://b55iddqqx45as" path="res://assets/TheSafe.png" id="2_k5oqk"]
+[ext_resource type="Texture2D" uid="uid://davla8msw0u5a" path="res://assets/graphics/green_back.jpeg" id="2_eu15q"]
 [ext_resource type="Script" path="res://scenes/interaction_area/interaction_area.gd" id="3_uuyfr"]
 [ext_resource type="PackedScene" uid="uid://cajs0tgregleq" path="res://scenes/game_the_safe/lock/lock.tscn" id="4_5qlp6"]
-[ext_resource type="LabelSettings" uid="uid://ck51gus4s16yq" path="res://resources/label_settings/title.tres" id="5_0q54e"]
-[ext_resource type="LabelSettings" uid="uid://c73erm5h1e1tq" path="res://resources/label_settings/text.tres" id="6_4atp4"]
+[ext_resource type="LabelSettings" uid="uid://7grq8g4ger4u" path="res://resources/label_settings/TheSafeAddSub.tres" id="5_fg4vr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f45r"]
 size = Vector2(143, 100)
@@ -24,14 +23,40 @@ script = ExtResource("1_jlito")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="TheSafe" type="Sprite2D" parent="."]
-position = Vector2(-3.8147e-06, -11)
-scale = Vector2(0.339361, 0.339361)
-texture = ExtResource("2_k5oqk")
+[node name="Download" type="Sprite2D" parent="."]
+z_index = -1
+position = Vector2(-71, -227)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("2_eu15q")
+
+[node name="Node2D" type="Node2D" parent="."]
+modulate = Color(1, 1, 1, 0.564706)
+
+[node name="ColorRect" type="ColorRect" parent="Node2D"]
+offset_left = -296.0
+offset_top = 61.0
+offset_right = 296.0
+offset_bottom = 65.0
+color = Color(1, 1, 0, 1)
+
+[node name="ColorRect2" type="ColorRect" parent="Node2D"]
+offset_left = -3.09439
+offset_top = 65.0
+offset_right = 1.90561
+offset_bottom = 194.0
+color = Color(1, 1, 0, 1)
+
+[node name="ColorRect3" type="ColorRect" parent="Node2D"]
+offset_left = 142.798
+offset_top = 64.8872
+offset_right = 147.798
+offset_bottom = 193.887
+color = Color(1, 1, 0, 1)
 
 [node name="Table" type="Node2D" parent="."]
 
 [node name="Cover" type="ColorRect" parent="."]
+visible = false
 offset_left = -308.0
 offset_top = -186.0
 offset_right = 308.0
@@ -39,6 +64,7 @@ offset_bottom = 60.0
 color = Color(1, 1, 1, 0.737255)
 
 [node name="HandRect" type="ColorRect" parent="."]
+visible = false
 offset_left = -288.0
 offset_top = 62.0
 offset_right = -2.0
@@ -46,6 +72,7 @@ offset_bottom = 162.0
 color = Color(1, 1, 1, 0.737255)
 
 [node name="AddRect" type="ColorRect" parent="."]
+visible = false
 offset_top = 62.0
 offset_right = 143.0
 offset_bottom = 162.0
@@ -77,6 +104,7 @@ horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="SubRect" type="ColorRect" parent="."]
+visible = false
 offset_left = 145.0
 offset_top = 62.0
 offset_right = 288.0
@@ -112,7 +140,7 @@ vertical_alignment = 1
 position = Vector2(-205, 18)
 
 [node name="DiscardPileMarker" type="Marker2D" parent="."]
-position = Vector2(217, -106)
+position = Vector2(217, -88.4)
 
 [node name="Locks" type="Node2D" parent="."]
 position = Vector2(0, 32)
@@ -191,23 +219,21 @@ position = Vector2(185, 47)
 position = Vector2(236, 47)
 
 [node name="Label" type="Label" parent="."]
-visible = false
-offset_left = -233.0
-offset_top = -43.0
-offset_right = 250.0
-offset_bottom = 38.0
-text = "The Safecracker"
-label_settings = ExtResource("5_0q54e")
+offset_left = 34.6449
+offset_top = 70.9716
+offset_right = 105.645
+offset_bottom = 166.972
+text = "+"
+label_settings = ExtResource("5_fg4vr")
 horizontal_alignment = 1
 vertical_alignment = 1
 
 [node name="Label2" type="Label" parent="."]
-visible = false
-offset_left = -190.0
-offset_top = 114.0
-offset_right = 216.0
-offset_bottom = 149.0
-text = "Click to continue"
-label_settings = ExtResource("6_4atp4")
+offset_left = 181.524
+offset_top = 67.2717
+offset_right = 252.524
+offset_bottom = 163.272
+text = "-"
+label_settings = ExtResource("5_fg4vr")
 horizontal_alignment = 1
 vertical_alignment = 1

@@ -89,6 +89,7 @@ func _goto_next_state() -> void:
 		_current_state_impl = next_state_impl
 		next_state_impl.enter_state(_last_state)
 
+
 func _physics_process(delta: float) -> void:
 	if _current_state_impl == null:
 		return

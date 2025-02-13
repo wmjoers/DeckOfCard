@@ -31,7 +31,6 @@ func pick_with_position(position: Vector2, interaction_type_flags: int) -> bool:
 	
 	
 	var intersect_result: Array[Dictionary]  = _space_state.intersect_point(parameters, _max_results)
-	print("Intersections: ", intersect_result.size())
 
 	for ir in intersect_result: 
 		if ir.has("collider") and ir["collider"] is InteractionArea:

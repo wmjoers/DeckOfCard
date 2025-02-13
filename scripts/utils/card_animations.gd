@@ -9,6 +9,7 @@ static func move_card(tree: SceneTree, card: Card, position: Vector2, seconds: f
 	
 	card.set_floating(floating)
 	var tw = tree.create_tween()
+	card.attach_tween(tw)
 	tw.set_ease(Tween.EASE_IN_OUT)
 	tw.set_trans(Tween.TRANS_QUAD)
 	tw.tween_property(card, "global_position", position, seconds)
@@ -20,6 +21,7 @@ static func move_card(tree: SceneTree, card: Card, position: Vector2, seconds: f
 static func move_and_rotate_card(tree: SceneTree, card: Card, position: Vector2, rotation: float, seconds: float, floating: bool = false) -> Tween:
 	card.set_floating(floating)
 	var tw = tree.create_tween()
+	card.attach_tween(tw)
 	tw.set_ease(Tween.EASE_IN_OUT)
 	tw.set_trans(Tween.TRANS_QUAD)
 	tw.set_parallel(true)
@@ -34,6 +36,7 @@ static func move_and_rotate_card(tree: SceneTree, card: Card, position: Vector2,
 
 static func flip_card(tree: SceneTree, card: Card, seconds: float, delay: float = 0) -> Tween:
 	var tw = tree.create_tween()
+	card.attach_tween(tw)
 	if delay > 0:
 		tw.tween_interval(delay)
 	tw.set_ease(Tween.EASE_IN_OUT)
@@ -53,6 +56,7 @@ static func shake_card(tree: SceneTree, card: Card, repeats: int = 1) -> Tween:
 	repeats = max(repeats, 1)
 	
 	var tw = tree.create_tween()
+	card.attach_tween(tw)
 	for i in range(repeats):
 		tw.tween_property(card, "global_position", left_pos, 0.04)	
 		tw.tween_property(card, "global_position", right_pos, 0.04)	
@@ -67,6 +71,7 @@ static func wiggle_card(tree: SceneTree, card: Card, repeats: int = 1) -> Tween:
 	repeats = max(repeats, 1)
 	
 	var tw = tree.create_tween()
+	card.attach_tween(tw)
 	for i in range(repeats):
 		tw.tween_property(card, "rotation", left_rot, 0.1)	
 		tw.tween_property(card, "rotation", right_rot, 0.1)	

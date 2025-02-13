@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://cmu4cr2lmb5yv"
-path="res://.godot/imported/AmericanPurposeStripe1Normal-Zqd3.otf-2efdf4e4eb3743682a2619bea2c8b7be.fontdata"
+uid="uid://bh7q1uejoo3aa"
+path="res://.godot/imported/Mina-Regular.ttf-1ee421a99bef39fbfe952a3b0eec8eed.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/AmericanPurposeStripe1Normal-Zqd3.otf"
-dest_files=["res://.godot/imported/AmericanPurposeStripe1Normal-Zqd3.otf-2efdf4e4eb3743682a2619bea2c8b7be.fontdata"]
+source_file="res://assets/fonts/Mina-Regular.ttf"
+dest_files=["res://.godot/imported/Mina-Regular.ttf-1ee421a99bef39fbfe952a3b0eec8eed.fontdata"]
 
 [params]
 

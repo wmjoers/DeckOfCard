@@ -25,9 +25,37 @@ signal dropped(card: Card)
 @export var _floating: bool = false
 
 
+var _tweens: Array[Tween] = []
+
+
 func _ready() -> void:
 	_update_card()
 	
+
+func attach_tween(tween: Tween) -> void:
+	tween.finished.connect(on_tween_finished)
+	_tweens.append(tween)
+	
+
+func detach_tween(tween: Tween) -> void:
+	_tweens.erase(tween)
+
+
+func has_tweens() -> bool:
+	_check_tweens()
+	return _tweens.size() > 0
+
+
+func on_tween_finished() -> void:
+	_check_tweens()
+
+
+func _check_tweens() -> void:
+	for tween in _tweens:
+		if not tween.is_valid() or not tween.is_running():
+			_tweens.erase(tween)
+	
+
 
 func set_interaction_type(interaction_type: int, active: bool) -> void:
 	area.set_collision_layer_value(interaction_type, active) 

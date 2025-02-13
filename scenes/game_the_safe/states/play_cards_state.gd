@@ -24,7 +24,7 @@ func ready_state() -> void:
 	_picker = InteractionPicker.new(game.get_world_2d().direct_space_state)
 
 
-func enter_state(from_state: State) -> void:
+func enter_state(_from_state: State) -> void:
 	game.clear_all_area_states()
 	game.clear_all_card_states()
 	for card: Card in game.hand:
@@ -43,7 +43,7 @@ func exiting_state() -> void:
 	game.clear_all_area_states()
 
 
-func physics_process(delta: float) -> void:
+func physics_process(_delta: float) -> void:
 	if _dragger.is_dragging():
 		_dragger.drag_to(game.get_global_mouse_position())
 		
@@ -112,32 +112,21 @@ func _place_cards_around_point(cards: Array[Card], center_point: Vector2) -> voi
 func _update_calculations() -> void:
 	_key_value = 0
 	for card in _add_cards:
-		_key_value += _get_key_value(card)
+		_key_value += CardUtils.get_key_value(card)
 	for card in _sub_cards:
-		_key_value -= _get_key_value(card)
+		_key_value -= CardUtils.get_key_value(card)
 		
 	if _add_cards.size() == 0 and _sub_cards.size() == 0:
 		_key_value = -1
 	
 	for lock in game.locks:
 		if lock.is_accessible():
-			var lock_value: int = _get_lock_value(lock.get_card())
+			var lock_value: int = CardUtils.get_lock_value(lock.get_card())
 			if lock_value == _key_value:
 				CardAnimations.wiggle_card(_tree, lock.get_card(), 3)
 	
 	_dirty_key_value = false;	
 	
-
-func _get_key_value(card: Card) -> int:
-	var ci: CardInfo = card.get_card_info()
-	return int(ci.rank) + 1
-
-func _get_lock_value(card: Card) -> int:
-	var ci: CardInfo = card.get_card_info()
-	if ci.rank == CardInfo.Rank.ACE:
-		return 0
-	else:
-		return int(ci.rank) + 1
 
 func _check_lock(card: Card) -> bool:
 	var lock: Lock = null
@@ -145,7 +134,7 @@ func _check_lock(card: Card) -> bool:
 		if l.get_card() == card:
 			lock = l
 			break
-	if lock and _get_lock_value(card) == _key_value:
+	if lock and CardUtils.get_lock_value(card) == _key_value:
 		var disc: Array[Card] = []
 		lock.set_card(null)
 		disc.append(card)
@@ -162,7 +151,10 @@ func _check_lock(card: Card) -> bool:
 			game.discard_card(c)
 		return true
 	else:
-		CardAnimations.shake_card(_tree, card, 3)
+		if not card.has_tweens():
+			CardAnimations.shake_card(_tree, card, 3)
+		else:
+			print("Skipping shake...")
 		return false
 
 func _remove_from_hand(card: Card) -> void:

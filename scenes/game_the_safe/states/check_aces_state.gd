@@ -11,7 +11,7 @@ func enter_state(from_state: State) -> void:
 	var result: int = _check_aces()
 
 	if result == NO_ACES:
-		_exit_to(BaseState.State.PLAY_CARDS)
+		_exit_to(BaseState.State.CHECK_GAME_OVER)
 		return
 
 	var timer = _tree.create_timer(0.4)
@@ -24,7 +24,7 @@ func _handle_aces() -> void:
 	if ACES_AND_OTHERS:
 		_hide_all_not_aces()
 
-	_exit_to(BaseState.State.PLAY_CARDS, 1.0)
+	_exit_to(BaseState.State.CHECK_GAME_OVER, 1.0)
 
 func _shake_all_aces() -> void:
 	for lock in game.locks:

@@ -1,64 +1,18 @@
-States
-- BUILD_LEVEL
-- DEAL_HAND
-- CHECK_FOR_ACES
-- PICK_LOCKS
-- OPEN_LOCK
-- DISCARD_HAND
-- GAME_OVER_WIN
-- GAME_OVER_LOSE
 
 
-Card
-	Ska vara en visual representation av spelkortet på skärmen. 
-	Har olika states som påverkar hur kortet ser ut förutom position och rotation
-	Har en Area2D för att kunna detektera musklick + om det är över en CardArea
-	Ska inte innehålla några animationer
 
-InteractionArea
-	En area som kan reagera på när ett kort kommer in på ytan.
-	Håller koll på kort som kommit in på ytan
-	Kan tala om ifall ett kort släppts på ytan
+Todo:
+	* Visa = istället för + och - om ett ess är framme.
+	* Game Over - Win
+		- Dölj allt UI
+		- Animera ut kasthögen
+		- Animera kort i hand och kortlek till en samlingspunkt.
+		- Visa You win! och "You opened the safe and managed to get away!" "You got X million dollars"
+	* Game Over - Lose
+		- Dölj allt UI
+		- Animera ut kort i hand och kortlek.
+		- Animera låskort till en samlingspunkt.
+		- Visa You lose! och "You failed to open the safe and got busted!" "You got X years in prison"
 
-CardZSorter
-	Ansvarar för alla Card-objekt på skärmen och ser till så Z-värdet hålls uppdaterat.
-
-InteractionAreaPicker
-	Hitta ett eller alla kort på en specifik position med en specifik interaction_layer
-	Kunna göra en pick med flera interaction_layers och sen plocka ut med en av dem? För
-	att slippa göra flera picks?
-	Kunna känna av CardArea också?
-	
-CardDragger
-	Kan flytta ett kort baserat på en anchor point
-	Borde kunna flytta flera kort samtidigt (t.ex. klondike)?
-
-CardArrayUtils
-	set_interaction_layers(array, top_interaction_layer, rest_interaction_layer)
-	sort_on_x(array)
-	sort_on_y(array)
-	
-CardAnimationUtils
-	move_card_to_pos(card, vector2, rotation, seconds, floating)
-	flip_card(card, time, direction)
-	
-CardArrangeUtils
-	get_rand_pos(original_position, max_distance)
-	get_rand_tilt(original_rotation, max_tilt)
-	get_spread_x_positions(number_of_points, max_width, min_space)
-	get_spread_y_positions(number_of_points, max_height, min_space)
-	get_deck_spread(original_point, number of points)
-
-
-_deck: Array[Card] = []
-get_deck_spread
-set_interaction_layers
-card_z_sorter.to_front_array(_deck)
-
-
-_hand: Array[Card] = []
-_hand_area: CardArea
-Lyssna på kort som kommer in i hand_area och lägg det i _hand
-Sortera _hand med sort_on_x(_hand)
-card_z_sorter.to_front_array(_hand)
-Om droppat kort: get_spread_x_positions + animera alla kort till sina platser
+	* Startskärm med titel och val att spela eller får en tutorial.
+	* Tutorial med förpreppad lek och styrda uppgifter att göra.

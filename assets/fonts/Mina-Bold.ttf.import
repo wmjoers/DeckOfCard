@@ -2,13 +2,13 @@
 
 importer="font_data_dynamic"
 type="FontFile"
-uid="uid://xil2nyq0qhsk"
-path="res://.godot/imported/MouseMemoirs-Zg8l.ttf-085ded3d40ef5208e20520e8a8ab9533.fontdata"
+uid="uid://dts6rc0lgexbp"
+path="res://.godot/imported/Mina-Bold.ttf-701c1ca058c3d4fd841f8dab9be4af98.fontdata"
 
 [deps]
 
-source_file="res://assets/fonts/MouseMemoirs-Zg8l.ttf"
-dest_files=["res://.godot/imported/MouseMemoirs-Zg8l.ttf-085ded3d40ef5208e20520e8a8ab9533.fontdata"]
+source_file="res://assets/fonts/Mina-Bold.ttf"
+dest_files=["res://.godot/imported/Mina-Bold.ttf-701c1ca058c3d4fd841f8dab9be4af98.fontdata"]
 
 [params]
 

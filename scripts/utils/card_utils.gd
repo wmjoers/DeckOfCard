@@ -36,3 +36,37 @@ static func spread_points_horizontal(number_of_points: int, center_point: Vector
 		points.append(Vector2(start_x + i * ideal_spacing, center_point.y))
 	
 	return points
+
+
+static func get_key_value(card: Card) -> int:
+	var ci: CardInfo = card.get_card_info()
+	return int(ci.rank) + 1
+
+static func get_lock_value(card: Card) -> int:
+	var ci: CardInfo = card.get_card_info()
+	if ci.rank == CardInfo.Rank.ACE:
+		return 0
+	else:
+		return int(ci.rank) + 1
+
+static func can_get_target(numbers: Array[int], target: int) -> bool:
+	var queue = {0: true}  # Använder dictionary för att simulera en set
+	
+	for num in numbers:
+		var next_queue = queue.duplicate()  # Behåll tidigare möjliga summor
+		
+		for val in queue.keys():
+			next_queue[val + num] = true
+			next_queue[val - num] = true
+		
+		queue = next_queue  # Uppdatera queue
+	
+	return target in queue
+
+
+static func can_get_any_target(numbers: Array[int], targets: Array[int]) -> bool:
+	for target in targets:
+		if can_get_target(numbers, target):
+			return true
+	return false		
+	
