@@ -49,19 +49,41 @@ static func get_lock_value(card: Card) -> int:
 	else:
 		return int(ci.rank) + 1
 
+
 static func can_get_target(numbers: Array[int], target: int) -> bool:
-	var queue = {0: true}  # Använder dictionary för att simulera en set
+	var expressions: Array[String] = [""]
+	var results: Array[int] = [0]
 	
 	for num in numbers:
-		var next_queue = queue.duplicate()  # Behåll tidigare möjliga summor
-		
-		for val in queue.keys():
-			next_queue[val + num] = true
-			next_queue[val - num] = true
-		
-		queue = next_queue  # Uppdatera queue
-	
-	return target in queue
+		var new_expressions: Array[String] = []
+		var new_results: Array[int] = []
+		for i in range(results.size()):
+			var r = results[i]
+			var e = expressions[i]
+			new_results.append(r+num)
+			new_results.append(r-num)
+			new_expressions.append(e + "+" + str(num))
+			new_expressions.append(e + "-" + str(num))	
+		results += new_results
+		expressions += new_expressions
+
+	var filtered_expressions: Array[String] = []
+	var filtered_results: Array[int] = []
+
+	for i in range(results.size()):
+		if results[i] == target:
+			filtered_expressions.append(expressions[i])
+			filtered_results.append(results[i])
+
+	expressions = filtered_expressions
+	results = filtered_results
+
+	for i in range(results.size()):
+		var r = results[i]
+		var e = expressions[i]
+		print(e,"=",r)
+
+	return results.size() > 0
 
 
 static func can_get_any_target(numbers: Array[int], targets: Array[int]) -> bool:

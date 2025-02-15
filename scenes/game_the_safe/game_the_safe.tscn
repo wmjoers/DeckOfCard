@@ -1,21 +1,14 @@
-[gd_scene load_steps=9 format=3 uid="uid://d3gw8j7ttoeft"]
+[gd_scene load_steps=8 format=3 uid="uid://d3gw8j7ttoeft"]
 
 [ext_resource type="Script" path="res://scenes/game_the_safe/game_the_safe.gd" id="1_jlito"]
 [ext_resource type="Texture2D" uid="uid://davla8msw0u5a" path="res://assets/graphics/green_back.jpeg" id="2_eu15q"]
 [ext_resource type="Script" path="res://scenes/interaction_area/interaction_area.gd" id="3_uuyfr"]
+[ext_resource type="Script" path="res://scenes/game_the_safe/areas.gd" id="3_xh0n1"]
 [ext_resource type="PackedScene" uid="uid://cajs0tgregleq" path="res://scenes/game_the_safe/lock/lock.tscn" id="4_5qlp6"]
 [ext_resource type="LabelSettings" uid="uid://7grq8g4ger4u" path="res://resources/label_settings/TheSafeAddSub.tres" id="5_fg4vr"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_2f45r"]
 size = Vector2(143, 100)
-
-[sub_resource type="LabelSettings" id="LabelSettings_jwsh5"]
-font_size = 38
-font_color = Color(0, 0, 0, 0.490196)
-
-[sub_resource type="LabelSettings" id="LabelSettings_6x5hx"]
-font_size = 44
-font_color = Color(0, 0, 0, 0.490196)
 
 [node name="GameTest" type="Node2D"]
 script = ExtResource("1_jlito")
@@ -23,124 +16,86 @@ script = ExtResource("1_jlito")
 [node name="Camera2D" type="Camera2D" parent="."]
 zoom = Vector2(2, 2)
 
-[node name="Download" type="Sprite2D" parent="."]
+[node name="Background" type="Sprite2D" parent="."]
 z_index = -1
 position = Vector2(-71, -227)
 scale = Vector2(0.8, 0.8)
 texture = ExtResource("2_eu15q")
 
-[node name="Node2D" type="Node2D" parent="."]
+[node name="UI" type="Node2D" parent="."]
+
+[node name="DeckMarker" type="Marker2D" parent="UI"]
+position = Vector2(-205, 18)
+
+[node name="DiscardPileMarker" type="Marker2D" parent="UI"]
+position = Vector2(217, -88.4)
+
+[node name="Areas" type="Node2D" parent="UI"]
+script = ExtResource("3_xh0n1")
+
+[node name="AdditionArea" type="Area2D" parent="UI/Areas"]
+position = Vector2(72, 112)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_uuyfr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Areas/AdditionArea"]
+shape = SubResource("RectangleShape2D_2f45r")
+
+[node name="SubtractionArea" type="Area2D" parent="UI/Areas"]
+position = Vector2(217, 112)
+collision_layer = 0
+collision_mask = 0
+script = ExtResource("3_uuyfr")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="UI/Areas/SubtractionArea"]
+shape = SubResource("RectangleShape2D_2f45r")
+
+[node name="AddLabel" type="Label" parent="UI/Areas"]
+offset_left = 34.6449
+offset_top = 70.9716
+offset_right = 105.645
+offset_bottom = 166.972
+text = "+"
+label_settings = ExtResource("5_fg4vr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="SubLabel" type="Label" parent="UI/Areas"]
+offset_left = 181.524
+offset_top = 67.2717
+offset_right = 252.524
+offset_bottom = 163.272
+text = "-"
+label_settings = ExtResource("5_fg4vr")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Lines" type="Node2D" parent="UI"]
 modulate = Color(1, 1, 1, 0.564706)
 
-[node name="ColorRect" type="ColorRect" parent="Node2D"]
+[node name="ColorRect" type="ColorRect" parent="UI/Lines"]
 offset_left = -296.0
 offset_top = 61.0
 offset_right = 296.0
 offset_bottom = 65.0
 color = Color(1, 1, 0, 1)
 
-[node name="ColorRect2" type="ColorRect" parent="Node2D"]
+[node name="ColorRect2" type="ColorRect" parent="UI/Lines"]
 offset_left = -3.09439
 offset_top = 65.0
 offset_right = 1.90561
 offset_bottom = 194.0
 color = Color(1, 1, 0, 1)
 
-[node name="ColorRect3" type="ColorRect" parent="Node2D"]
+[node name="ColorRect3" type="ColorRect" parent="UI/Lines"]
 offset_left = 142.798
 offset_top = 64.8872
 offset_right = 147.798
 offset_bottom = 193.887
 color = Color(1, 1, 0, 1)
 
-[node name="Table" type="Node2D" parent="."]
-
-[node name="Cover" type="ColorRect" parent="."]
-visible = false
-offset_left = -308.0
-offset_top = -186.0
-offset_right = 308.0
-offset_bottom = 60.0
-color = Color(1, 1, 1, 0.737255)
-
-[node name="HandRect" type="ColorRect" parent="."]
-visible = false
-offset_left = -288.0
-offset_top = 62.0
-offset_right = -2.0
-offset_bottom = 162.0
-color = Color(1, 1, 1, 0.737255)
-
-[node name="AddRect" type="ColorRect" parent="."]
-visible = false
-offset_top = 62.0
-offset_right = 143.0
-offset_bottom = 162.0
-color = Color(1, 1, 1, 0.737255)
-
-[node name="AdditionArea" type="Area2D" parent="AddRect"]
-position = Vector2(72, 50)
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("3_uuyfr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="AddRect/AdditionArea"]
-shape = SubResource("RectangleShape2D_2f45r")
-
-[node name="Label" type="Label" parent="AddRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 10.0
-offset_top = 2.0
-offset_right = -8.0
-offset_bottom = -2.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "+"
-label_settings = SubResource("LabelSettings_jwsh5")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="SubRect" type="ColorRect" parent="."]
-visible = false
-offset_left = 145.0
-offset_top = 62.0
-offset_right = 288.0
-offset_bottom = 162.0
-color = Color(1, 1, 1, 0.737255)
-
-[node name="SubtractionArea" type="Area2D" parent="SubRect"]
-position = Vector2(72, 50)
-collision_layer = 0
-collision_mask = 0
-script = ExtResource("3_uuyfr")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="SubRect/SubtractionArea"]
-shape = SubResource("RectangleShape2D_2f45r")
-
-[node name="Label2" type="Label" parent="SubRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = 47.0
-offset_top = -3.0
-offset_right = -46.0
-offset_bottom = -42.0
-grow_horizontal = 2
-grow_vertical = 2
-text = "_"
-label_settings = SubResource("LabelSettings_6x5hx")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="DeckMarker" type="Marker2D" parent="."]
-position = Vector2(-205, 18)
-
-[node name="DiscardPileMarker" type="Marker2D" parent="."]
-position = Vector2(217, -88.4)
+[node name="Cards" type="Node2D" parent="."]
 
 [node name="Locks" type="Node2D" parent="."]
 position = Vector2(0, 32)
@@ -217,23 +172,3 @@ position = Vector2(185, 47)
 
 [node name="Card4" type="Marker2D" parent="Hand"]
 position = Vector2(236, 47)
-
-[node name="Label" type="Label" parent="."]
-offset_left = 34.6449
-offset_top = 70.9716
-offset_right = 105.645
-offset_bottom = 166.972
-text = "+"
-label_settings = ExtResource("5_fg4vr")
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="Label2" type="Label" parent="."]
-offset_left = 181.524
-offset_top = 67.2717
-offset_right = 252.524
-offset_bottom = 163.272
-text = "-"
-label_settings = ExtResource("5_fg4vr")
-horizontal_alignment = 1
-vertical_alignment = 1

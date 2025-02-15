@@ -11,6 +11,7 @@ func _check_free_locks() -> void:
 	var delay: float = 0.0
 
 	if not _has_ace():
+		game.show_plus_minus()
 		for lock in game.locks:
 			if lock.is_flipped_and_free(game.locks):
 				CardAnimations.flip_card(_tree, lock.get_card(), 0.2, delay)

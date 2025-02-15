@@ -3,14 +3,14 @@ extends Node2D
 
 class_name GameTheSafe
 
-
-@onready var deck_marker: Marker2D = $DeckMarker
-@onready var discard_pile_marker: Marker2D = $DiscardPileMarker
-@onready var table_node: Node2D = $Table
+@onready var deck_marker: Marker2D = $UI/DeckMarker
+@onready var discard_pile_marker: Marker2D = $UI/DiscardPileMarker
+@onready var addition_area: InteractionArea = $UI/Areas/AdditionArea
+@onready var subtraction_area: InteractionArea = $UI/Areas/SubtractionArea
+@onready var cards_node: Node2D = $Cards
 @onready var locks_node: Node2D = $Locks
 @onready var hand_node: Node2D = $Hand
-@onready var addition_area: InteractionArea = $AddRect/AdditionArea
-@onready var subtraction_area: InteractionArea = $SubRect/SubtractionArea
+@onready var areas: Areas = $UI/Areas
 
 
 const DECK_INFO: DeckInfo = preload("res://resources/deck_info/standard_deck_info.tres")
@@ -56,14 +56,14 @@ func _init_cards() -> void:
 	
 	for i in range(0, DECK_INFO.card_info_list.size()):
 		var card = CARD_SCENE.instantiate()
-		table_node.add_child(card)
+		cards_node.add_child(card)
 		card.flipp()
 		card.rotation = CardUtils.get_random_tilt(0, CARD_IN_DECK_MAX_TILT)
 		card.global_position = deck_marker.global_position - Vector2(0.1, 0.1) * i
 		card.set_card_info(DECK_INFO.card_info_list.pop_back())
 		deck.append(card)
 		
-	_card_collection = CardCollection.new(table_node)
+	_card_collection = CardCollection.new(cards_node)
 	_card_collection.clear_all_card_states()
 
 
@@ -140,3 +140,11 @@ func discard_card(card: Card) -> void:
 	var pos: Vector2 = CardUtils.get_random_position(org_pos, CARD_IN_DISCARD_SPREAD)
 	var rot: float = CardUtils.get_random_tilt(0, CARD_IN_DISCARD_MAX_TILT)
 	CardAnimations.move_and_rotate_card(get_tree(), card, pos, rot, 0.4, true)
+
+
+func show_equals() -> void:
+	areas.show_equals()
+
+
+func show_plus_minus() -> void:
+	areas.show_plus_minus()

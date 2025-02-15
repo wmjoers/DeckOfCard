@@ -86,28 +86,35 @@ func _stop_dragging_card_if_any() -> void:
 	
 	_picker.pick_with_position(mouse_pos, BitUtils.bit_to_mask(AREA_INTERACTION_TYPE))
 	
+	# Check if dropped in an area
 	var area: InteractionArea = _picker.get_top_area()
 	if area:		
 		if area == game.addition_area:
 			_add_cards.append(card)
-			_dirty_key_value = true
+			_update_calculations()
 			_place_cards_around_point(_add_cards, game.addition_area.global_position)
 		elif area == game.subtraction_area:
 			_sub_cards.append(card)
-			_dirty_key_value = true
+			_update_calculations()
 			_place_cards_around_point(_sub_cards, game.subtraction_area.global_position)
-	else:
-		_return_to_hand(card)
+		else:
+			_return_to_hand(card)
+		return			
+		
+	# Check if dropped close to a card in hand	
+	if _put_in_closest_hand_pos(card):
+		return
+		
+	# Default is move tha card back to the hand position
+	_return_to_hand(card)
 
-	if _dirty_key_value:
-		_update_calculations()
 
 func _place_cards_around_point(cards: Array[Card], center_point: Vector2) -> void:
 	game.to_front_array(cards)
 	var points: Array[Vector2] = CardUtils.spread_points_horizontal(cards.size(), center_point, 80.0, 20.0)
 
 	for i in range(cards.size()):
-		CardAnimations.move_card(_tree, cards[i], points[i], 0.2, true)
+		CardAnimations.move_card(_tree, cards[i], points[i], 0.2, false)
 
 func _update_calculations() -> void:
 	_key_value = 0
@@ -162,6 +169,37 @@ func _remove_from_hand(card: Card) -> void:
 	if index != -1:
 		game.hand[index] = null
 
+
+func _put_in_closest_hand_pos(card: Card) -> bool:
+	
+	var nearest_index: int = -1
+	var nearest_dist: float = 999.0
+	
+	for i in range(game.hand_pos.size()):
+		var dist: float = game.hand_pos[i].distance_to(card.global_position)
+		if dist < 20.0 and dist < nearest_dist:
+			nearest_dist = dist
+			nearest_index = i
+	
+	if nearest_index == -1:
+		return false
+
+	var hand_index: int = game.hand.find(card)
+
+	var replace_card = game.hand[nearest_index]
+		
+	game.hand[hand_index] = null
+	game.hand[nearest_index] = card
+	_return_to_hand(card)
+	
+	if replace_card != null:
+		game.to_front(replace_card)
+		game.to_front(card)
+		game.hand[hand_index] = replace_card	
+		_return_to_hand(replace_card)
+	
+	return true;
+	
 func _return_to_hand(card: Card) -> void:
 	var hand_index: int = game.hand.find(card)
 	if hand_index >= 0:

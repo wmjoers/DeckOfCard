@@ -19,10 +19,9 @@ func enter_state(from_state: State) -> void:
 	
 func _handle_aces() -> void:
 				
-	_shake_all_aces()
-		
-	if ACES_AND_OTHERS:
-		_hide_all_not_aces()
+	_shake_all_aces()	
+	_hide_all_not_aces()
+	game.show_equals()
 
 	_exit_to(BaseState.State.CHECK_GAME_OVER, 1.0)
 
