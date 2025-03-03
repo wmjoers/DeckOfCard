@@ -195,8 +195,9 @@ func _put_in_closest_hand_pos(card: Card) -> bool:
 	if replace_card != null:
 		game.to_front(replace_card)
 		game.to_front(card)
-		game.hand[hand_index] = replace_card	
-		_return_to_hand(replace_card)
+		game.hand[hand_index] = replace_card
+		if replace_card not in _add_cards and replace_card not in _sub_cards:
+			_return_to_hand(replace_card)
 	
 	return true;
 	
